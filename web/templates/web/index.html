@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <title>Weather app</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <form class="weatherForm">
+                <input type="text" placeholder="Ваш город(латинские буквы)" name="city" class="weatherFormInput">
+                <button type="submit" class="weatherFormButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40" x="0px" y="0px"><g data-name="Layer 2"><path d="M29.71,28.29l-7.41-7.4a11.52,11.52,0,1,0-1.41,1.41l7.4,7.41a1,1,0,0,0,1.42,0A1,1,0,0,0,29.71,28.29ZM4,13.5A9.5,9.5,0,1,1,13.5,23,9.51,9.51,0,0,1,4,13.5Z"/></g></svg>
+                </button>
+            </form>
+            <div class="weatherInfo">
+                <div class="weatherInfo__info">
+                    <p>{{cityText}}</p>
+                    <div class="weather">
+                        <h1>{{weatherText}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="weatherNext">
+                <h2>Следующие 24 часа</h2>
+                <div class="content">
+                    {% for time, degress, image in weatherBlock%}
+                    <div class="weatherNext__block">
+                        <div class="block__time">
+                            <h3>{{time}}</h3>
+                        </div>
+                        <div class="block__img">
+                            <img src="{{image}}" alt="{{time}}">
+                        </div>
+                        <div class="block__weather">
+                            <h3>
+                                {{degress}}
+                            </h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        
+    </div>
+</body>
+</html>
