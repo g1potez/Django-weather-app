@@ -1,9 +1,12 @@
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 def index(request):
     city = request.GET.get('city')
+    current_date = datetime.datetime.today()
+    date = current_date.strftime('%d %B, %Y')
 
     if city:
         city = city.lower()
@@ -31,6 +34,7 @@ def index(request):
         weatherBlock = zip(nextWeatherTime, nextWeatherDegress, nextWeatherImg)
         
         return render(request, 'web/index.html', context={'city': city, 
+                                                          'date': date,
                                                           'weatherText': weatherText,
                                                           'cityText': cityText,
                                                           'weatherBlock': weatherBlock
